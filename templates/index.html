@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang=en>
+<head>
+
+	<meta charset="utf-8">
+	
+	<title>It's my pizza and I want it now</title>
+	
+</head>
+
+<body>
+<div class="wrapper" style="display: block; margin: auto;">
+
+	{% for r in places %}
+		<h2> {{ r.name }} </h2>
+		<p> {{ r.addr }} </p>
+		{% if r.open %}
+		<p> <a href="tel:{{ r.intphone }}">{{r.phone}}</a> </p>
+		
+		<p> <span style="color: green;">Open</span></p>
+		{% else %}
+		<p> <span style="color: red;">Closed</span></p>
+		{% endif %}
+</div>
+</body>
+</html>
