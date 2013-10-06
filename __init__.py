@@ -15,15 +15,12 @@ def index():
 def pizza():
 	lat = request.args.get('lat', 42.358766, type=float)
 	long = request.args.get('long', -71.093799, type=float)
-	#lat = request.args.get('lat', 0, type=float)
-	#long = request.args.get('long', 0, type=float)
 	day = ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')[request.args.get('day', 0, type=int)]
 
-	places = get_pizza_places(lat,long)
-	
+	places = get_pizza_places(lat,long, 32000) # 32000 meters is 20 miles
+
 	chosen = get_closest_ten((lat,long), places)
 
 	places_list = parse_chosen(chosen, day) # these are all horrible names. worse is better.
-
 
 	return render_template('pizza.html', places=places_list)

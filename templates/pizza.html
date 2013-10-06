@@ -1,0 +1,11 @@
+<div class="pizza_listing" style="text-align:center;">
+
+	{% for r in places %}
+		<h2> {{ r.name }} </h2>
+		<p> {{ r.addr }} </p>
+		<p> <a href="tel:{{ r.int_phone }}">{{r.phone}}</a> </p>
+		{% if r.open_hours %}
+		<p> Hours today: {{ r.open_hours[0] }} </p>
+		{% endif %}
+	{% endfor %}
+</div>

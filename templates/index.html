@@ -8,6 +8,7 @@
 
 	<script type="text/javascript">
 	var x = document.getElementById("pizza");
+	
 	function showError(error) {
 		switch(error.code) {
 		case error.PERMISSION_DENIED:
@@ -27,16 +28,12 @@
 
 	function getLocation() {
 		if (navigator.geolocation) {
-			navigator.geolocation.getCurrentPosition(showPosition, showError);
+			navigator.geolocation.getCurrentPosition(getPizzaLocations, showError);
 		}
 		else{x.innerHTML="Geolocation is not supported by this browser.";}
 	}
 
-	function showPosition(position) {
-	 	x.innerHTML="Latitude: " + position.coords.latitude +
-	 	"<br>Longitude: " + position.coords.longitude;
-	 }
-	function getPizzaLocations() {
+	function getPizzaLocations(position) {
 		var d=new Date();
 		$.ajax({
 			url: "/getPizza",
@@ -45,10 +42,16 @@
 				long: position.coords.longitude,
 				day: d.getDay()		
 			},
-			success: function( data ) {
-				$( "#pizza_listing" ).html( data );
-			}
+		})
+		.done(function(data) {
+			$("#pizza_listing").html(data);
 		});
+	//	.fail(function() {
+	//		alert( "error" );
+	//	})
+	//	.always(function() {
+	//		alert( "complete" );
+	//	});
 	}
 
 	</script>
@@ -59,10 +62,10 @@
 </head>
 
 <body>
-<div class="wrapper" style="display: block; margin: auto;">
+<div class="wrapper" style="text-align:center;">
 
 <div id="pizza_listing">
-	<button onclick=getPizzaLocations()> Click here to find pizza. </button>
+	<button onclick=getLocation()> Click here to find pizza. </button>
 </div>
 
 </div>
