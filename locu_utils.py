@@ -12,8 +12,17 @@ def get_pizza_places(lat, long, radius):
 	return venues
 
 
+#def distance(base, other):
+#	return math.sqrt( (base[0] - other[0])**2 + (base[1] - other[1])**2)
+
 def distance(base, other):
-	return math.sqrt( (base[0] - other[0])**2 + (base[1] - other[1])**2)
+    lat1,lon1 = map(math.radians, base)
+    lat2,lon2 = map(math.radians, other)
+    radius = 6371
+    return math.acos(math.sin(lat1)*math.sin(lat2) + 
+                        math.cos(lat1)*math.cos(lat2) *
+                        math.cos(lon2-lon1)) * radius;
+
 
 def get_closest_ten(base, places):
 	distances = list()
