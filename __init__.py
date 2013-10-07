@@ -17,7 +17,7 @@ def pizza():
 	long = request.args.get('long', -71.093799, type=float)
 	day = ('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday')[request.args.get('day', 0, type=int)]
 
-	places = get_pizza_places(lat,long, 32000) # 32000 meters is 20 miles
+	places = get_pizza_places(lat,long, 16000) # 16000 meters is 10 miles
 
 	chosen = get_closest_ten((lat,long), places)
 
